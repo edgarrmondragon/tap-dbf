@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "tap-dbf"
+version = "0.1.0"
+description = "Singer tap for .DBF files"
+authors = ["Edgar R. Mondragón <edgarrm358@gmail.com>"]
+license = "Apache 2.0"
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.9"
+singer-sdk = "0.2.0"
+dbfread = "^2.0.7"
+
+[tool.poetry.dev-dependencies]
+black = "^21.5b1"
+isort = "^5.8.0"
+mypy = "^0.812"
+flake8 = "^3.9.2"
+pydocstyle = "^6.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+tap-dbf = 'tap_dbf.tap:cli'
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3 # Vertical Hanging Indent
+src_paths = "tap_dbf"

@@ -92,7 +92,7 @@ class DBFStream(Stream):
             self._table = DBF(
                 filepath,
                 ignorecase=False,
-                load=False,
+                load=True,
                 ignore_missing_memofile=ignore_missing_memofile,
             )
 
@@ -109,11 +109,11 @@ class DBFStream(Stream):
 
     def get_records(self, context: Optional[dict] = None) -> Iterable[RawRecord]:
         """Get .DBF rows."""
-        with patch_open(self.filesystem):
-            for index, row in enumerate(self._table):
-                row["_sdc_filepath"] = self.filepath
-                row["_sdc_row_index"] = index
-                yield row
+        # with patch_open(self.filesystem):
+        for index, row in enumerate(self._table):
+            row["_sdc_filepath"] = self.filepath
+            row["_sdc_row_index"] = index
+            yield row
 
 
 class TapDBF(Tap):

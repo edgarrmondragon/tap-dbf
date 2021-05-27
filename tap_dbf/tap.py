@@ -47,7 +47,7 @@ def dbf_field_to_jsonschema(field: DBFField) -> Dict[str, Any]:
 
 
 class DBFStream(Stream):
-    """A .DBF file stream."""
+    """A dBase file stream."""
 
     primary_keys = ["_sdc_filepath", "_sdc_row_index"]
 

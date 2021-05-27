@@ -1,0 +1,4 @@
+{
+  "path": "tests/data/files/*.dbf",
+  "ignore_missing_memofile": true
+}

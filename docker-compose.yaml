@@ -9,5 +9,5 @@ services:
       MINIO_ACCESS_KEY: someKey
       MINIO_SECRET_KEY: someSecret
     volumes:
-      - ./data/:/data/
+      - ./tests/data/:/data/
     command: server /data

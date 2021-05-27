@@ -1,0 +1,5 @@
+{
+  "path": "/files/*.dbf",
+  "fs_root": "file://tests/data",
+  "ignore_missing_memofile": true
+}

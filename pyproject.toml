@@ -13,7 +13,7 @@ fs = "==2.4.14"
 fs-s3fs = {version = "==1.1.1", optional = true}
 
 [tool.poetry.dev-dependencies]
-black = "^21.12b0"
+black = "^22.1"
 isort = "^5.10.1"
 mypy = "^0.931"
 flake8 = "^4.0.1"

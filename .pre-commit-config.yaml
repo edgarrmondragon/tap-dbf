@@ -1,25 +1,53 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
 ci:
   autofix_prs: false
 
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-json
-      - id: check-yaml
-  - repo: https://github.com/psf/black
-    rev: 23.1.0
-    hooks:
-      - id: black
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.991
-    hooks:
-      - id: mypy
-  - repo: https://github.com/pycqa/isort
-    rev: "5.12.0"
-    hooks:
-      - id: isort
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-json
+    exclude: "\\.vscode/.*.json"
+  - id: check-toml
+  - id: check-yaml
+  - id: end-of-file-fixer
+  - id: trailing-whitespace
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.3.1
+  hooks:
+  - id: pyupgrade
+    args: [--py36-plus]
+
+- repo: https://github.com/psf/black
+  rev: 23.1.0
+  hooks:
+  - id: black
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.0.0
+  hooks:
+  - id: mypy
+    pass_filenames: true
+    additional_dependencies:
+    - types-requests
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+  - id: isort
+
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+    additional_dependencies:
+    - darglint
+    - flake8-annotations
+    - flake8-docstrings
+    exclude: "noxfile\\.py"
+
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.0.246
+  hooks:
+  - id: ruff
+    args: ["--fix"]

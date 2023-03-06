@@ -47,7 +47,7 @@ repos:
     exclude: "noxfile\\.py"
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.253
+  rev: v0.0.254
   hooks:
   - id: ruff
     args: ["--fix"]

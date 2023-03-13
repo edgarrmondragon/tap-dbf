@@ -24,7 +24,7 @@ repos:
   - id: black
 
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.0.1
+  rev: v1.1.1
   hooks:
   - id: mypy
     pass_filenames: true
@@ -47,7 +47,7 @@ repos:
     exclude: "noxfile\\.py"
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.254
+  rev: v0.0.255
   hooks:
   - id: ruff
     args: ["--fix"]

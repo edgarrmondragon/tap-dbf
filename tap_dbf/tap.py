@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import builtins
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Callable, Dict, Iterable
+from typing import TYPE_CHECKING, Any, BinaryIO, Callable, Dict, Generator, Iterable
 
 from dbfread import DBF
 from fs.opener import parse, registry
@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from dbfread.dbf import DBFField
     from fs.base import FS
 
-
-RawRecord = Dict[str, Any]
+    OpenFunc = Callable[[PathLike, str], BinaryIO]
+    RawRecord = Dict[str, Any]
 
 
 def dbf_field_to_jsonschema(field: DBFField) -> dict[str, Any]:
@@ -92,7 +92,7 @@ class PatchOpen:
         _patch_open(self.old_impl)
 
 
-def _patch_open(func: Callable) -> Callable:
+def _patch_open(func: OpenFunc) -> OpenFunc:
     """Patch `builtins.open` with `func`.
 
     Args:
@@ -102,8 +102,57 @@ def _patch_open(func: Callable) -> Callable:
         The original `builtins.open` function.
     """
     old_impl = builtins.open
-    builtins.open = func
-    return old_impl
+    builtins.open = func  # type: ignore[assignment]
+    return old_impl  # type: ignore[return-value]
+
+
+class FilesystemDBF(DBF):
+    """A DBF implementation that can open files in arbitrary filesystems."""
+
+    def __init__(
+        self,
+        *args: Any,
+        opener: OpenFunc = open,  # type: ignore[assignment]
+        **kwargs: Any,
+    ) -> None:
+        """Create a new DBF instance.
+
+        Args:
+            *args: Positional arguments to pass to the DBF constructor.
+            opener: The file opener to use.
+            **kwargs: Keyword arguments to pass to the DBF constructor.
+        """
+        self.opener = opener
+
+        with PatchOpen(opener):
+            super().__init__(*args, **kwargs)
+
+    def _count_records(self, record_type: bytes = b" ") -> int:
+        """Count records in the table.
+
+        Args:
+            record_type: The record type to count.
+
+        Returns:
+            The number of records.
+        """
+        with PatchOpen(self.opener):
+            return super()._count_records(record_type)
+
+    def _iter_records(
+        self,
+        record_type: bytes = b" ",
+    ) -> Generator[dict[str, Any], None, None]:
+        """Iterate over records in the table.
+
+        Args:
+            record_type: The record type to iterate over.
+
+        Yields:
+            A record.
+        """
+        with PatchOpen(self.opener):
+            yield from super()._iter_records(record_type)
 
 
 class DBFStream(Stream):
@@ -131,13 +180,12 @@ class DBFStream(Stream):
         self.filesystem = filesystem
         name = Path(filepath).stem
 
-        with PatchOpen(filesystem):
-            self._table = DBF(
-                filepath,
-                ignorecase=False,
-                load=True,
-                ignore_missing_memofile=ignore_missing_memofile,
-            )
+        self._table = FilesystemDBF(
+            filepath,
+            ignorecase=False,
+            ignore_missing_memofile=ignore_missing_memofile,
+            opener=filesystem,
+        )
 
         self._fields = list(self._table.fields)
         schema = {

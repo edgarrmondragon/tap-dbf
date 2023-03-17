@@ -53,6 +53,7 @@ def dbf_field_to_jsonschema(field: DBFField) -> dict[str, Any]:
         d["format"] = "time"
     else:
         d["type"].append("string")
+        d["maxLength"] = field.length
 
     return d
 
@@ -158,8 +159,6 @@ class FilesystemDBF(DBF):
 class DBFStream(Stream):
     """A dBase file stream."""
 
-    primary_keys = ["_sdc_filepath", "_sdc_row_index"]
-
     def __init__(
         self: DBFStream,
         tap: Tap,
@@ -188,11 +187,14 @@ class DBFStream(Stream):
         )
 
         self._fields = list(self._table.fields)
-        schema = {
-            "properties": {
-                field.name: dbf_field_to_jsonschema(field) for field in self._fields
-            },
-        }
+        schema: dict[str, Any] = {"properties": {}}
+        self.primary_keys = []
+
+        for field in self._fields:
+            schema["properties"][field.name] = dbf_field_to_jsonschema(field)
+            if field.type == "+":
+                self.primary_keys.append(field.name)
+
         schema["properties"]["_sdc_filepath"] = {"type": ["string"]}
         schema["properties"]["_sdc_row_index"] = {"type": ["integer"]}
 

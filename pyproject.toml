@@ -18,9 +18,9 @@ keywords = [
 ]
 license = "Apache-2.0"
 readme = "README.md"
-homepage = "https://github.com/edgarrmondragon/tap-pulumi-cloud"
-repository = "https://github.com/edgarrmondragon/tap-pulumi-cloud"
-documentation = "https://github.com/edgarrmondragon/tap-pulumi-cloud#readme"
+homepage = "https://github.com/edgarrmondragon/tap-dbf"
+repository = "https://github.com/edgarrmondragon/tap-dbf"
+documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
 classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",

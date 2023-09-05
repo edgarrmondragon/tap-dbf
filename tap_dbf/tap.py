@@ -12,11 +12,17 @@ from singer_sdk import Stream, Tap
 from singer_sdk.typing import BooleanType, PropertiesList, Property, StringType
 
 if TYPE_CHECKING:
+    import sys
     from os import PathLike
     from types import TracebackType
 
     from dbfread.dbf import DBFField
     from fs.base import FS
+
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
+        from typing_extensions import Self
 
     OpenFunc = Callable[[PathLike, str], BinaryIO]
     RawRecord = Dict[str, Any]
@@ -31,9 +37,7 @@ def dbf_field_to_jsonschema(field: DBFField) -> dict[str, Any]:
     Returns:
         A JSON schema.
     """
-    d: dict[str, Any] = {}
-    d["type"] = ["null"]
-
+    d: dict[str, Any] = {"type": ["null"]}
     if field.type == "N":
         if field.decimal_count == 0:
             d["type"].append("integer")
@@ -69,7 +73,7 @@ class PatchOpen:
         """
         self.old_impl = _patch_open(fs.open)
 
-    def __enter__(self: PatchOpen) -> PatchOpen:
+    def __enter__(self: Self) -> Self:
         """Create a context for the patched function.
 
         Returns:
@@ -79,9 +83,9 @@ class PatchOpen:
 
     def __exit__(
         self: PatchOpen,
-        exc_type: type[Exception],
-        exc_val: Exception,
-        exc_tb: TracebackType,
+        exc_type: type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: TracebackType | None,
     ) -> None:
         """Exit context and revert patch.
 

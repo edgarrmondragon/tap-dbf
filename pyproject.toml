@@ -42,6 +42,7 @@ fs-s3fs = {version = "~=1.1.1", optional = true}
 [tool.poetry.group.dev.dependencies]
 singer-sdk = {version = "*", extras = ["testing"]}
 pytest-github-actions-annotate-failures = "~=0.2.0"
+typing-extensions = {version = "^4.7.1", python = "<3.11"}
 
 [tool.poetry.scripts]
 tap-dbf = 'tap_dbf.tap:cli'

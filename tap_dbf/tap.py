@@ -5,11 +5,11 @@ from __future__ import annotations
 import builtins
 import typing as t
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qsl, urlparse, urlunparse
 
 import fsspec
+import singer_sdk.typing as th
 from singer_sdk import Stream, Tap
-from singer_sdk.typing import BooleanType, PropertiesList, Property, StringType
 
 from tap_dbf.client import FilesystemDBF
 
@@ -173,10 +173,18 @@ class TapDBF(Tap):
     """A singer tap for .DBF files."""
 
     name = "tap-dbf"
-    config_jsonschema = PropertiesList(
-        Property("path", StringType, required=True),
-        Property("fs_root", StringType, default="file://"),
-        Property("ignore_missing_memofile", BooleanType, default=False),
+    config_jsonschema = th.PropertiesList(
+        th.Property("path", th.StringType, required=True),
+        th.Property("fs_root", th.StringType, default="file://"),
+        th.Property("ignore_missing_memofile", th.BooleanType, default=False),
+        th.Property(
+            "s3",
+            th.ObjectType(
+                th.Property("key", th.StringType, secret=True),
+                th.Property("secret", th.StringType, secret=True),
+                th.Property("endpoint_url", th.StringType),
+            ),
+        ),
     ).to_dict()
 
     def discover_streams(self: TapDBF) -> list[DBFStream]:
@@ -189,15 +197,22 @@ class TapDBF(Tap):
 
         fs_root: str = self.config["fs_root"]
         url = urlparse(fs_root)
-        fs: AbstractFileSystem = fsspec.filesystem(
-            url.scheme,
-            host=self.config["fs_root"],
-            port=url.port,
-            username=url.username,
-            password=url.password,
-        )
+        protocol = url.scheme
 
-        full_path = fs_root + self.config["path"]
+        storage_options = {
+            **dict(parse_qsl(url.query)),
+            **self.config.get(protocol, {}),
+        }
+
+        fs: AbstractFileSystem = fsspec.filesystem(url.scheme, **storage_options)
+
+        full_path = urlunparse(
+            url._replace(
+                query="",
+                netloc=url.hostname or "",
+                path=url.path + self.config["path"],
+            ),
+        )
         for match in fs.glob(full_path):
             stream = DBFStream(
                 tap=self,

@@ -45,8 +45,13 @@ Example configuration:
 ```json
 {
   "path": "/*.dbf",
-  "fs_root": "s3://someKey:someSecret@files?endpoint_url=http%3A//localhost%3A9000",
-  "ignore_missing_memofile": true
+  "fs_root": "s3://files",
+  "ignore_missing_memofile": true,
+  "s3": {
+    "key": "someKey",
+    "secret": "someSecret",
+    "endpoint_url": "http://localhost:9000"
+  }
 }
 ```
 

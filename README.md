@@ -32,6 +32,15 @@ Example configuration:
 }
 ```
 
+The `fs_root` key is optional and defaults to the current working directory:
+
+```json
+{
+  "path": "data/files/*.dbf",
+  "ignore_missing_memofile": true
+}
+```
+
 ### S3
 
 You need to install the package with the `s3` extra:

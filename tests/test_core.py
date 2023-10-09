@@ -6,10 +6,19 @@ from singer_sdk.testing import get_tap_test_class
 
 from tap_dbf.tap import TapDBF
 
-SAMPLE_CONFIG = {
-    "path": "/files/*.dbf",
-    "fs_root": "file://tests/data",
-    "ignore_missing_memofile": True,
-}
+TestTapDBF = get_tap_test_class(
+    TapDBF,
+    config={
+        "path": "/files/*.dbf",
+        "fs_root": "file://tests/data",
+        "ignore_missing_memofile": True,
+    },
+)
 
-TestTapDBF = get_tap_test_class(TapDBF, config=SAMPLE_CONFIG)
+TestTapDBFNoRoot = get_tap_test_class(
+    TapDBF,
+    config={
+        "path": "tests/data/files/*.dbf",
+        "ignore_missing_memofile": True,
+    },
+)

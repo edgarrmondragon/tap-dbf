@@ -206,13 +206,14 @@ class TapDBF(Tap):
 
         fs: AbstractFileSystem = fsspec.filesystem(url.scheme, **storage_options)
 
-        full_path = urlunparse(
-            url._replace(
-                query="",
-                netloc=url.hostname or "",
-                path=url.path + self.config["path"],
-            ),
-        )
+        path = url.path + self.config["path"]
+        if not url.hostname:
+            hostname, path = path.split("/", 1)
+        else:
+            hostname = url.hostname
+
+        full_path = urlunparse(url._replace(query="", netloc=hostname, path=path))
+
         for match in fs.glob(full_path):
             stream = DBFStream(
                 tap=self,

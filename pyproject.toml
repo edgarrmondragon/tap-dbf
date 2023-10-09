@@ -36,8 +36,10 @@ classifiers = [
 python = ">=3.8,<3.12"
 singer-sdk = "~=0.32.0"
 dbfread = "~=2.0.7"
-fs = "~=2.4.16"
-fs-s3fs = {version = "~=1.1.1", optional = true}
+fsspec = "~=2023.9.2"
+
+# Filesystems
+s3fs = {version = "~=2023.9.2", optional = true}
 
 [tool.poetry.group.dev.dependencies]
 singer-sdk = {version = "*", extras = ["testing"]}
@@ -48,7 +50,7 @@ typing-extensions = {version = "^4.7.1", python = "<3.11"}
 tap-dbf = 'tap_dbf.tap:cli'
 
 [tool.poetry.extras]
-s3 = ["fs-s3fs"]
+s3 = ["s3fs"]
 
 [tool.black]
 line-length = 88

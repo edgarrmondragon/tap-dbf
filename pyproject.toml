@@ -34,7 +34,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-singer-sdk = "~=0.32.0"
+singer-sdk = ">=0.32,<0.34"
 dbfread = "~=2.0.7"
 fsspec = "~=2023.9.2"
 

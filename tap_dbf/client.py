@@ -107,7 +107,7 @@ class FilesystemDBF(DBF):
                 if sep == record_type:
                     count += 1
                     self._skip_record(infile)
-                elif sep in (b"\x1a", b""):
+                elif sep in {b"\x1a", b""}:
                     # End of records.
                     break
                 else:
@@ -158,7 +158,7 @@ class FilesystemDBF(DBF):
 
                     yield self.recfactory(items)
 
-                elif sep in (b"\x1a", b""):
+                elif sep in {b"\x1a", b""}:
                     # End of records.
                     break
                 else:

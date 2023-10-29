@@ -4,14 +4,11 @@ POETRY := $(shell command -v poetry 2> /dev/null)
 
 .PHONY: lint
 lint:
-	$(POETRY) run flake8 $(NAME)
-	$(POETRY) run pydocstyle $(NAME)
-	$(POETRY) run black --check $(NAME)
+	$(POETRY) run ruff check --fix --show-fixes $(NAME)
 
 .PHONY: format
 format:
-	$(POETRY) run black $(NAME)
-	$(POETRY) run isort $(NAME)
+	$(POETRY) run ruff format $(NAME)
 
 .PHONY: about
 .SILENT: about

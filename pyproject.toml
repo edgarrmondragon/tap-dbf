@@ -42,6 +42,7 @@ fsspec = "~=2023.9.2"
 s3fs = {version = "~=2023.9.2", optional = true}
 
 [tool.poetry.group.dev.dependencies]
+ruff = ">=0.1"
 singer-sdk = {version = "*", extras = ["testing"]}
 pytest-github-actions-annotate-failures = "~=0.2.0"
 typing-extensions = {version = "^4.7.1", python = "<3.11"}
@@ -52,14 +53,14 @@ tap-dbf = 'tap_dbf.tap:cli'
 [tool.poetry.extras]
 s3 = ["s3fs"]
 
-[tool.black]
-line-length = 88
-
 [tool.ruff]
-ignore = ["ANN101", "DJ", "PD"]
-select = ["ALL"]
 src = ["tap_dbf", "tests"]
 target-version = "py38"
+
+[tool.ruff.lint]
+ignore = ["ANN101", "DJ", "PD", "COM812", "ISC001", "CPY"]
+preview = true
+select = ["ALL"]
 unfixable = [
   "ERA001",  # commented-out-code
 ]

@@ -7,7 +7,7 @@ requires = [
 
 [tool.poetry]
 name = "tap-dbf"
-version = "0.1.0"
+version = "0.0.0"
 description = "Singer tap for .DBF files"
 authors = ["Edgar R. Mondragón <edgarrm358@gmail.com>"]
 keywords = [

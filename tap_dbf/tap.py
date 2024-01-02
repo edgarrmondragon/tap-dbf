@@ -26,7 +26,7 @@ if t.TYPE_CHECKING:
     else:
         from typing_extensions import Self
 
-    OpenFunc = t.Callable[[PathLike, str], t.BinaryIO]
+    OpenFunc = t.Callable[[PathLike[bytes], str], t.BinaryIO]
     RawRecord = t.Dict[str, t.Any]
 
 
@@ -157,7 +157,10 @@ class DBFStream(Stream):
 
         super().__init__(tap, schema=schema, name=name)
 
-    def get_records(self: DBFStream, _: dict | None = None) -> t.Iterable[RawRecord]:
+    def get_records(
+        self: DBFStream,
+        _: dict[str, t.Any] | None = None,
+    ) -> t.Iterable[RawRecord]:
         """Get .DBF rows.
 
         Yields:

@@ -1,29 +1,26 @@
 [build-system]
-build-backend = "poetry_dynamic_versioning.backend"
+build-backend = "hatchling.build"
 requires = [
-  "poetry-core==1.8",
-  "poetry-dynamic-versioning",
+  "hatch-vcs",
+  "hatchling",
 ]
 
-[tool.poetry]
+[project]
 name = "tap-dbf"
-version = "0.0.0"
 description = "Singer tap for .DBF files"
-authors = ["Edgar R. Mondragón <edgarrm358@gmail.com>"]
+readme = "README.md"
 keywords = [
+  "dBase",
+  "dbf",
   "ELT",
   "singer.io",
-  "dbf",
-  "dBase",
 ]
 license = "Apache-2.0"
-readme = "README.md"
-homepage = "https://github.com/edgarrmondragon/tap-dbf"
-repository = "https://github.com/edgarrmondragon/tap-dbf"
-documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
+maintainers = [{ name = "Edgar R. Mondragón", email = "edgarrm358@gmail.com" }]
+authors = [{ name = "Edgar R. Mondragón", email = "edgarrm358@gmail.com" }]
+requires-python = ">=3.8"
 classifiers = [
   "Operating System :: OS Independent",
-  "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
@@ -32,42 +29,52 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Topic :: Database",
 ]
+dynamic = [
+  "version",
+]
+dependencies = [
+  "dbfread~=2.0.7",
+  "fsspec~=2023.9.2",
+  "singer-sdk~=0.34.0",
+]
+optional-dependencies.dev = [
+  "singer-sdk[s3,testing,typing]",
+]
+optional-dependencies.s3 = [
+  "s3fs~=2023.9.2",
+]
+optional-dependencies.testing = [
+  "deptry>=0.12",
+  "pytest>=7.4",
+  "pytest-github-actions-annotate-failures~=0.2.0",
+  "singer-sdk[testing]~=0.34.0",
+]
+optional-dependencies.typing = [
+  "mypy",
+  'typing-extensions>=4.7.1; python_version < "3.11"',
+]
+urls.documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
+urls.homepage = "https://github.com/edgarrmondragon/tap-dbf"
+urls.repository = "https://github.com/edgarrmondragon/tap-dbf"
+scripts."tap-dbf" = 'tap_dbf.tap:cli'
 
-[tool.poetry.dependencies]
-python = ">=3.8"
-singer-sdk = "~=0.34.0"
-dbfread = "~=2.0.7"
-fsspec = "~=2023.9.2"
+[tool.hatch.version]
+source = "vcs"
 
-# Filesystems
-s3fs = {version = "~=2023.9.2", optional = true}
+[tool.hatch.envs.sync.scripts]
+console = "tap-dbf {args}"
+jsonl = "tap-dbf {args} > tap-dbf.jsonl"
 
-[tool.poetry.group.dev.dependencies]
-ruff = ">=0.1"
-singer-sdk = {version = "*", extras = ["testing"]}
-pytest-github-actions-annotate-failures = "~=0.2.0"
-typing-extensions = {version = "^4.7.1", python = "<3.11"}
+[tool.hatch.envs.test]
+features = ["testing"]
+[tool.hatch.envs.test.scripts]
+integration = "pytest {args:tests}"
+dependencies = "deptry ."
 
-[tool.poetry.scripts]
-tap-dbf = 'tap_dbf.tap:cli'
-
-[tool.poetry.extras]
-s3 = ["s3fs"]
-
-[tool.poetry-dynamic-versioning]
-enable = true
-format-jinja = """
-    {%- if distance == 0 -%}
-        {{ serialize_pep440(base, stage, revision) }}
-    {%- elif revision is not none -%}
-        {{ serialize_pep440(base, stage, revision + 1, dev=distance, metadata=[commit]) }}
-    {%- else -%}
-        {{ serialize_pep440(bump_version(base), stage, revision, dev=distance, metadata=[commit]) }}
-    {%- endif -%}
-"""
-metadata = true
-style = "pep440"
-vcs = "git"
+[tool.hatch.envs.typing]
+features = ["testing", "typing"]
+[tool.hatch.envs.typing.scripts]
+check = "mypy --strict {args:tap_dbf tests}"
 
 [tool.ruff]
 src = ["tap_dbf", "tests"]
@@ -93,6 +100,19 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.deptry.package_module_name_map]
+mypy = "mypy"
+s3fs = "s3fs"
+
+[tool.deptry.per_rule_ignores]
+DEP002 = [
+  "deptry",
+  "mypy",
+  "pytest",
+  "pytest-github-actions-annotate-failures",
+  "s3fs",
+]
 
 [tool.mypy]
 python_version = "3.12"

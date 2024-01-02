@@ -16,7 +16,7 @@ if t.TYPE_CHECKING:
     from fsspec import AbstractFileSystem
 
 
-class FilesystemDBF(DBF):
+class FilesystemDBF(DBF):  # type: ignore[misc]
     """A DBF implementation that can open files in arbitrary filesystems."""
 
     def __init__(  # noqa: PLR0913
@@ -28,7 +28,7 @@ class FilesystemDBF(DBF):
         ignorecase: bool = True,
         lowernames: bool = False,
         parserclass: type[FieldParser] = FieldParser,
-        recfactory: type[dict] = collections.OrderedDict,
+        recfactory: type[dict[str, t.Any]] = collections.OrderedDict,
         load: bool = False,
         raw: bool = False,
         ignore_missing_memofile: bool = False,
@@ -118,7 +118,7 @@ class FilesystemDBF(DBF):
     def _iter_records(
         self,
         record_type: bytes = b" ",
-    ) -> t.Generator[dict, None, None]:
+    ) -> t.Generator[dict[str, t.Any], None, None]:
         """Iterate over records in the table.
 
         Args:

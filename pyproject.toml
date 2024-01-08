@@ -41,7 +41,7 @@ optional-dependencies.dev = [
   "singer-sdk[s3,testing,typing]",
 ]
 optional-dependencies.s3 = [
-  "s3fs~=2023.9.2",
+  "s3fs~=2023.12.2",
 ]
 optional-dependencies.testing = [
   "deptry>=0.12",

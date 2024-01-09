@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import builtins
+import logging
 import typing as t
 from pathlib import Path
 from urllib.parse import parse_qsl, urlparse, urlunparse
@@ -28,6 +29,8 @@ if t.TYPE_CHECKING:
 
     OpenFunc = t.Callable[[PathLike[bytes], str], t.BinaryIO]
     RawRecord = t.Dict[str, t.Any]
+
+logger = logging.getLogger(__name__)
 
 
 def dbf_field_to_jsonschema(field: DBFField) -> dict[str, t.Any]:
@@ -188,6 +191,12 @@ class TapDBF(Tap):
                 th.Property("endpoint_url", th.StringType),
             ),
         ),
+        th.Property(
+            "gcs",
+            th.ObjectType(
+                th.Property("token", th.StringType),
+            ),
+        ),
     ).to_dict()
 
     def discover_streams(self: TapDBF) -> list[DBFStream]:
@@ -218,6 +227,7 @@ class TapDBF(Tap):
         full_path = urlunparse(url._replace(query="", netloc=hostname, path=path))
 
         for match in fs.glob(full_path):
+            self.logger.info("Extracting from %s://%s", url.scheme, match)
             stream = DBFStream(
                 tap=self,
                 filepath=match,

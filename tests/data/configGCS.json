@@ -1,0 +1,8 @@
+{
+  "path": "/*.dbf",
+  "fs_root": "gcs://edgarrmondragon-test",
+  "ignore_missing_memofile": true,
+  "gcs": {
+    "token": "/path/to/user/.config/gcloud/application_default_credentials.json"
+  }
+}

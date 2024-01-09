@@ -38,7 +38,10 @@ dependencies = [
   "singer-sdk~=0.34.0",
 ]
 optional-dependencies.dev = [
-  "singer-sdk[s3,testing,typing]",
+  "singer-sdk[gcs,s3,testing,typing]",
+]
+optional-dependencies.gcs = [
+  "gcsfs~=2023.12.2.post1",
 ]
 optional-dependencies.s3 = [
   "s3fs~=2023.12.2",
@@ -61,6 +64,8 @@ scripts."tap-dbf" = 'tap_dbf.tap:cli'
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.envs.sync]
+features = ["gcs", "s3"]
 [tool.hatch.envs.sync.scripts]
 console = "tap-dbf {args}"
 jsonl = "tap-dbf {args} > tap-dbf.jsonl"
@@ -108,11 +113,15 @@ s3fs = "s3fs"
 [tool.deptry.per_rule_ignores]
 DEP002 = [
   "deptry",
+  "gcsfs",
   "mypy",
   "pytest",
   "pytest-github-actions-annotate-failures",
   "s3fs",
 ]
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
 
 [tool.mypy]
 python_version = "3.12"

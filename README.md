@@ -64,6 +64,29 @@ Example configuration:
 }
 ```
 
+### Google Cloud Storage
+
+You need to install the package with the `gcs` extra:
+
+```shell
+pip install 'tap-dbf[gcs]'
+```
+
+Example configuration:
+
+```json
+{
+  "path": "/*.dbf",
+  "fs_root": "gcs://files",
+  "ignore_missing_memofile": true,
+  "gcs": {
+    "token": "cloud"
+  }
+}
+```
+
+See https://gcsfs.readthedocs.io/en/latest/#credentials for more information about the `token` key.
+
 ## Roadmap
 
 - Google Drive filesystem

@@ -52,7 +52,7 @@ jobs:
 
     - name: Install Hatch
       run: |
-        pipx install hatch --python "python${{ matrix.python-version }}"
+        pipx install hatch
         hatch --version
 
     - name: Run

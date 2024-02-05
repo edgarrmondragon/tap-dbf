@@ -18,6 +18,10 @@ updates:
     labels:
       - "dependencies"
     versioning-strategy: increase-if-necessary
+    groups:
+      singer-sdk:
+        patterns:
+          - "singer-sdk*"
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:

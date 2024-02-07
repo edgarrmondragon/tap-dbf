@@ -180,22 +180,62 @@ class TapDBF(Tap):
 
     name = "tap-dbf"
     config_jsonschema = th.PropertiesList(
-        th.Property("path", th.StringType, required=True),
-        th.Property("fs_root", th.StringType, default="file://"),
-        th.Property("ignore_missing_memofile", th.BooleanType, default=False),
+        th.Property(
+            "path",
+            th.StringType,
+            required=True,
+            description=(
+                "Glob expression where the files are located. Stream names will be "
+                "extracted from the file name."
+            ),
+        ),
+        th.Property(
+            "fs_root",
+            th.StringType,
+            default="file://",
+            description="The root of the filesystem to read from.",
+        ),
+        th.Property(
+            "ignore_missing_memofile",
+            th.BooleanType,
+            default=False,
+            description=(
+                "Whether to proceed reading the file even if the [memofile] is not "
+                "present."
+            ),
+        ),
         th.Property(
             "s3",
             th.ObjectType(
-                th.Property("key", th.StringType, secret=True),
-                th.Property("secret", th.StringType, secret=True),
-                th.Property("endpoint_url", th.StringType),
+                th.Property(
+                    "key",
+                    th.StringType,
+                    secret=True,
+                    description="The AWS key ID.",
+                ),
+                th.Property(
+                    "secret",
+                    th.StringType,
+                    secret=True,
+                    description="The AWS secret key.",
+                ),
+                th.Property(
+                    "endpoint_url",
+                    th.StringType,
+                    description="The S3 endpoint URL.",
+                    examples=[
+                        "https://localhost:9000",
+                    ],
+                ),
             ),
+            description="S3 configuration.",
         ),
         th.Property(
             "gcs",
             th.ObjectType(
                 th.Property("token", th.StringType),
             ),
+            description="GCS configuration.",
         ),
     ).to_dict()
 
@@ -238,6 +278,3 @@ class TapDBF(Tap):
             streams.append(stream)
 
         return streams
-
-
-cli = TapDBF.cli

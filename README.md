@@ -4,10 +4,19 @@ Singer tap for the [dBase file format](https://en.wikipedia.org/wiki/.dbf).
 
 ## Configuration
 
-| Key                       | Description                                                                                     | Type    | Required | Default |
-|---------------------------|-------------------------------------------------------------------------------------------------|---------|----------|---------|
-| `path`                    | Glob expression where the files are located. Stream names will be extracted from the file name. | string  | yes      |         |
-| `ignore_missing_memofile` | Whether to proceed reading the file even if the [memofile] is not present                       | boolean | no       | false   |
+| Setting                 | Required | Default | Description |
+|:------------------------|:--------:|:-------:|:------------|
+| path                    | True     | None    | Glob expression where the files are located. Stream names will be extracted from the file name. |
+| fs_root                 | False    | file:// | The root of the filesystem to read from. |
+| ignore_missing_memofile | False    |       0 | Whether to proceed reading the file even if the [memofile] is not present. |
+| s3                      | False    | None    | S3 configuration. |
+| gcs                     | False    | None    | GCS configuration. |
+| stream_maps             | False    | None    | Config object for stream maps capability. For more information check out [Stream Maps](https://sdk.meltano.com/en/latest/stream_maps.html). |
+| stream_map_config       | False    | None    | User-defined config values to be used within map expressions. |
+| faker_config            | False    | None    | Config for the [`Faker`](https://faker.readthedocs.io/en/master/) instance variable `fake` used within map expressions. Only applicable if the plugin specifies `faker` as an addtional dependency (through the `singer-sdk` `faker` extra or directly). |
+| flattening_enabled      | False    | None    | 'True' to enable schema flattening and automatically expand nested properties. |
+| flattening_max_depth    | False    | None    | The max depth to flatten schemas. |
+| batch_config            | False    | None    |             |
 
 ### JSON example
 

@@ -233,7 +233,11 @@ class TapDBF(Tap):
         th.Property(
             "gcs",
             th.ObjectType(
-                th.Property("token", th.StringType),
+                th.Property(
+                    "token",
+                    th.StringType,
+                    description="OAuth 2.0 token for GCS.",
+                ),
             ),
             description="GCS configuration.",
         ),

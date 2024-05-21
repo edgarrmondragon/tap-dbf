@@ -44,7 +44,7 @@ optional-dependencies.gcs = [
   "gcsfs~=2024.5.0",
 ]
 optional-dependencies.s3 = [
-  "s3fs~=2024.3.1",
+  "s3fs~=2024.5.0",
 ]
 optional-dependencies.testing = [
   "deptry>=0.12",

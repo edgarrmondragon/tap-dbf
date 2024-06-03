@@ -7,7 +7,7 @@ requires = [
 
 [project]
 name = "tap-dbf"
-description = "Singer tap for.DBF files"
+description = "Singer tap for DBF files"
 readme = "README.md"
 keywords = [
   "dBase",

@@ -21,6 +21,7 @@ if t.TYPE_CHECKING:
 
     from dbfread.dbf import DBFField
     from fsspec import AbstractFileSystem
+    from singer_sdk.helpers.types import Context
 
     if sys.version_info >= (3, 11):
         from typing import Self
@@ -162,7 +163,7 @@ class DBFStream(Stream):
 
     def get_records(
         self: DBFStream,
-        _: dict[str, t.Any] | None = None,
+        _: Context | None = None,
     ) -> t.Iterable[RawRecord]:
         """Get .DBF rows.
 

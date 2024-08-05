@@ -34,7 +34,11 @@ class FilesystemDBF(DBF):  # type: ignore[misc]
         ignore_missing_memofile: bool = False,
         char_decode_errors: str = "strict",
     ) -> None:
-        """Create a new DBF reader."""
+        """Create a new DBF reader.
+
+        Raises:
+            DBFNotFound: If the dBase file is not found.
+        """
         self.filesystem = filesystem
         self.encoding = encoding
         self.ignorecase = ignorecase

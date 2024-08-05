@@ -39,7 +39,7 @@ dynamic = [
 dependencies = [
   "dbfread~=2.0.7",
   "fsspec~=2024.6.0",
-  "singer-sdk~=0.38.0",
+  "singer-sdk~=0.39.0",
 ]
 optional-dependencies.dev = [
   "singer-sdk[gcs,s3,testing,typing]",

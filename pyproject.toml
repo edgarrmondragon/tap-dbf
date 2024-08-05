@@ -141,6 +141,7 @@ lint.preview = true
 [tool.deptry.package_module_name_map]
 mypy = "mypy"
 s3fs = "s3fs"
+tap-dbf = "tap_dbf"
 
 [tool.deptry.per_rule_ignores]
 DEP002 = [

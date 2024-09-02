@@ -1,4 +1,7 @@
-"""Entrypoint module, in case you use `python -m tap_dbf`."""
+"""Entrypoint module, in case you use `python -m tap_dbf`.
+
+Copyright 2024 Edgar Ramírez-Mondragón.
+"""
 
 from __future__ import annotations
 

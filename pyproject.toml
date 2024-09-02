@@ -31,6 +31,7 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Topic :: Database",
 ]
 dynamic = [
@@ -60,9 +61,9 @@ optional-dependencies.typing = [
   "mypy",
   "typing-extensions>=4.7.1; python_version<'3.11'",
 ]
-urls.documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
-urls.homepage = "https://github.com/edgarrmondragon/tap-dbf"
-urls.repository = "https://github.com/edgarrmondragon/tap-dbf"
+urls.Documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
+urls.Homepage = "https://github.com/edgarrmondragon/tap-dbf"
+urls.Repository = "https://github.com/edgarrmondragon/tap-dbf"
 scripts."tap-dbf" = "tap_dbf.tap:TapDBF.cli"
 
 [tool.hatch.version]
@@ -94,6 +95,7 @@ python = [
   "3.10",
   "3.11",
   "3.12",
+  "3.13",
 ]
 
 [tool.hatch.envs.typing]
@@ -105,8 +107,6 @@ features = [
 check = "mypy --strict {args:tap_dbf tests}"
 
 [tool.ruff]
-target-version = "py38"
-
 src = [
   "tap_dbf",
   "tests",
@@ -152,6 +152,9 @@ DEP002 = [
   "pytest-github-actions-annotate-failures",
   "s3fs",
 ]
+
+[tool.pyproject-fmt]
+max_supported_python = "3.13"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"

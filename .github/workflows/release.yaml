@@ -36,3 +36,5 @@ jobs:
 
       - name: Publish
         uses: pypa/gh-action-pypi-publish@v1.10.1
+        with:
+          attestations: true

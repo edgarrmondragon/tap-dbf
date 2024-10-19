@@ -160,7 +160,6 @@ max_supported_python = "3.13"
 addopts = "-vvv"
 
 [tool.mypy]
-python_version = "3.12"
 warn_redundant_casts = true
 warn_unreachable = true
 warn_unused_configs = true

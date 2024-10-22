@@ -32,7 +32,7 @@ if t.TYPE_CHECKING:
         from typing_extensions import Self
 
     OpenFunc = t.Callable[[PathLike[bytes], str], t.BinaryIO]
-    RawRecord = t.Dict[str, t.Any]
+    RawRecord = dict[str, t.Any]
 
 logger = logging.getLogger(__name__)
 

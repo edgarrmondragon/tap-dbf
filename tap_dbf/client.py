@@ -134,10 +134,13 @@ class FilesystemDBF(DBF):  # type: ignore[misc]
         Yields:
             A record.
         """
-        with self.filesystem.open(
-            self.filename,
-            "rb",
-        ) as infile, self._open_memofile() as memofile:
+        with (
+            self.filesystem.open(
+                self.filename,
+                "rb",
+            ) as infile,
+            self._open_memofile() as memofile,
+        ):
             # Skip to first record.
             infile.seek(self.header.headerlen, 0)  # type: ignore[union-attr]
 

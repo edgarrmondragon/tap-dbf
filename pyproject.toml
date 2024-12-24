@@ -45,7 +45,7 @@ optional-dependencies.dev = [
   "tap-dbf[gcs,s3,testing,typing]",
 ]
 optional-dependencies.gcs = [
-  "gcsfs~=2024.10.0",
+  "gcsfs~=2024.12.0",
 ]
 optional-dependencies.s3 = [
   "s3fs~=2024.10.0",

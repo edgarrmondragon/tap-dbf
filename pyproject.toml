@@ -53,7 +53,7 @@ optional-dependencies.s3 = [
 optional-dependencies.testing = [
   "deptry>=0.12",
   "pytest>=7.4",
-  "pytest-github-actions-annotate-failures~=0.2.0",
+  "pytest-github-actions-annotate-failures~=0.3.0",
   "singer-sdk[testing]",
 ]
 optional-dependencies.typing = [

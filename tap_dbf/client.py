@@ -53,7 +53,7 @@ class FilesystemDBF(DBF):  # type: ignore[misc]
 
         self.date: datetime.date | None
 
-        self.recfactory = (lambda items: items) if recfactory is None else recfactory
+        self.recfactory = recfactory
 
         # Name part before .dbf is the table name
         self.name = Path(filename).stem

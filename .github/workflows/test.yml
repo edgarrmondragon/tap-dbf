@@ -7,30 +7,32 @@ on:
     - tap_dbf/**
     - tests/**
     - pyproject.toml
+    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [main]
     paths:
     - tap_dbf/**
     - tests/**
     - pyproject.toml
+    - tox.ini
+    - uv.lock
     - .github/workflows/test.yml
-    - .github/workflows/constraints.txt
   schedule:
   - cron: "0 10 * * *"
   workflow_dispatch:
 
+env:
+  FORCE_COLOR: 1
+  UV_VERSION: ~=0.5.27
+
 jobs:
   tests:
     runs-on: ubuntu-latest
-    env:
-      FORCE_COLOR: "1"
-      PIP_CONSTRAINT: ${{ github.workspace }}/.github/workflows/constraints.txt
     strategy:
       fail-fast: false
       matrix:
-        script: ["test:integration"]
         python-version:
         - "3.9"
         - "3.10"
@@ -38,30 +40,24 @@ jobs:
         - "3.12"
         - "3.13"
         include:
-        - { script: "test:dependencies", python-version: "3.x" }
-        - { script: "typing:check",      python-version: "3.x" }
+        - { environment: "dependencies", python-version: "3.x" }
+        - { environment: "typing",       python-version: "3.x" }
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       with:
         fetch-depth: 0
-    - uses: actions/setup-python@v5
+    - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
       id: setup-python
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-        cache: pip
-
-    - name: Upgrade pip
-      run: |
-        pip install pip
-        pip --version
-
-    - name: Install Hatch
-      run: |
-        pipx install --python '${{ steps.setup-python.outputs.python-path }}' hatch
-        hatch --version
-
+    - uses: astral-sh/uv-pre-commit@2d6da37da5d672c1e59c3db790c139dc0e183629 # 0.5.27
+      with:
+        uv-version: ${{ env.UV_VERSION }}
     - name: Run
-      run: |
-        hatch run ${{ matrix.script }}
+      run: >
+        uvx
+        --with tox-uv
+        --with tox
+        tox -e ${{ matrix.environment || matrix.python-version }}

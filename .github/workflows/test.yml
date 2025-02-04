@@ -52,9 +52,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-    - uses: astral-sh/uv-pre-commit@2d6da37da5d672c1e59c3db790c139dc0e183629 # 0.5.27
+    - uses: astral-sh/setup-uv@4db96194c378173c656ce18a155ffc14a9fc4355 # v5.2.2
       with:
-        uv-version: ${{ env.UV_VERSION }}
+        version: ${{ env.UV_VERSION }}
     - name: Run
       run: >
         uvx

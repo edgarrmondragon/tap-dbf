@@ -42,6 +42,9 @@ dependencies = [
   "fsspec~=2024.12.0",
   "singer-sdk~=0.44.2",
 ]
+optional-dependencies.all = [
+  "tap-dbf[gcs,s3]",
+]
 optional-dependencies.gcs = [
   "gcsfs~=2024.12.0",
 ]

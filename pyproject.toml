@@ -46,7 +46,7 @@ optional-dependencies.gcs = [
   "gcsfs~=2024.12.0",
 ]
 optional-dependencies.s3 = [
-  "s3fs~=2024.12.0",
+  "s3fs~=2025.2.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-dbf"

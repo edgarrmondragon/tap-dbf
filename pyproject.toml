@@ -39,7 +39,7 @@ dynamic = [
 ]
 dependencies = [
   "dbfread~=2.0.7",
-  "fsspec~=2024.12.0",
+  "fsspec~=2025.2.0",
   "singer-sdk~=0.44.2",
 ]
 optional-dependencies.gcs = [

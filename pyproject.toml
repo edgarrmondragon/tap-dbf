@@ -113,6 +113,7 @@ mypy = "mypy"
 DEP002 = [
   "gcsfs",
   "s3fs",
+  "tap-dbf",
 ]
 DEP004 = [
   "typing_extensions",

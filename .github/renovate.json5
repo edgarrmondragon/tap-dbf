@@ -1,6 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>edgarrmondragon/.github:renovate-config"
+    "edgarrmondragon/.github//renovate/singer.json5",
+    "edgarrmondragon/.github//renovate/uv.json5",
   ]
 }

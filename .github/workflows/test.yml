@@ -25,7 +25,12 @@ on:
 
 env:
   FORCE_COLOR: 1
-  UV_VERSION: ~=0.5.27
+  # renovate: datasource=pypi depName=uv
+  UV_VERSION: 0.5.27
+  # renovate: datasource=pypi depName=tox
+  TOX_VERSION: 4.24.1
+  # renovate: datasource=pypi depName=tox-uv
+  TOX_UV_VERSION: 1.20.2
 
 jobs:
   tests:
@@ -58,6 +63,6 @@ jobs:
     - name: Run
       run: >
         uvx
-        --with tox-uv
-        --with tox
+        --with tox-uv==${{ env.TOX_UV_VERSION }}
+        --with tox==${{ env.TOX_VERSION }}
         tox -e ${{ matrix.environment || matrix.python-version }}

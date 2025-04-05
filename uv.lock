@@ -762,7 +762,7 @@ name = "importlib-metadata"
 version = "8.6.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "zipp" },
+    { name = "zipp", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/33/08/c1395a292bb23fd03bdf572a1357c5a733d3eecbab877641ceacab23db6e/importlib_metadata-8.6.1.tar.gz", hash = "sha256:310b41d755445d74569f993ccfc22838295d9fe005425094fad953d7f15c8580", size = 55767 }
 wheels = [
@@ -1601,7 +1601,7 @@ wheels = [
 
 [[package]]
 name = "singer-sdk"
-version = "0.44.3"
+version = "0.45.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "backoff", marker = "python_full_version < '4'" },
@@ -1626,9 +1626,9 @@ dependencies = [
     { name = "sqlalchemy" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a7/f8/8b0c0a75c749cc0c5f90a1060f79d365ea0b1c2c10a53c8aaeda14735b1f/singer_sdk-0.44.3.tar.gz", hash = "sha256:f2d7eacb4a05270613dc7c02cdcef383f3146e859a14dbdb7c207c90466c7701", size = 1404420 }
+sdist = { url = "https://files.pythonhosted.org/packages/e7/c7/8f541f370b502084f3a4c87939a67429e37eabb55448daa20b68a7a10b27/singer_sdk-0.45.5.tar.gz", hash = "sha256:4607da741ad742e1feea181fc08ee241dcbe1f244b42404182d48bcbd58982a8", size = 1421576 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/84/4e/ccbcab1185de53adc6ae4fcc7475a76d2b96b48c24d3df58e134c98fa1fd/singer_sdk-0.44.3-py3-none-any.whl", hash = "sha256:25cdde6552750485aaa0c98f5c5ba6bdd7e4c69e982c7d4c2631c6df3e64b1ae", size = 182898 },
+    { url = "https://files.pythonhosted.org/packages/94/d5/700a46c8f8952f234fc5b0ffba609de0666925c8897799c6d1fb15fd8a4e/singer_sdk-0.45.5-py3-none-any.whl", hash = "sha256:171450d762c5268387625032a57460882ee25eff1ee88dc3b853d915c4ebbeb2", size = 189789 },
 ]
 
 [package.optional-dependencies]
@@ -1747,7 +1747,7 @@ requires-dist = [
     { name = "gcsfs", marker = "extra == 'gcs'", specifier = "~=2025.3.0" },
     { name = "s3fs", marker = "extra == 'all'", specifier = "~=2025.3.0" },
     { name = "s3fs", marker = "extra == 's3'", specifier = "~=2025.3.0" },
-    { name = "singer-sdk", specifier = "~=0.44.2" },
+    { name = "singer-sdk", specifier = "~=0.45.3" },
 ]
 provides-extras = ["all", "gcs", "s3"]
 

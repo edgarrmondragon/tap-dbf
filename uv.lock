@@ -1852,14 +1852,14 @@ wheels = [
 
 [[package]]
 name = "types-setuptools"
-version = "80.1.0.20250503"
+version = "80.3.0.20250505"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "setuptools" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/6a/63/973d60e59c70ef6fc98eff4f8fa1ef552c4f7486f79df68f16b3628b8ec1/types_setuptools-80.1.0.20250503.tar.gz", hash = "sha256:3cbdbe42c12e1d9179e6e87644a2cf176259411b5a3cc1d0fb0d824dc711d9ed", size = 43334, upload-time = "2025-05-03T02:58:15.134Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f4/1e/9c401fc3aa8f8c1596a9daedbe8d1c70c830e20d78753117d75f7e9b9535/types_setuptools-80.3.0.20250505.tar.gz", hash = "sha256:5fd3d34b8fa3441d68d010fef95e232d1e48f3f5cb578f3477b7aae4f8374502", size = 41205, upload-time = "2025-05-05T03:06:44.726Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f2/c1/9e878008ad0ecac9d89c28831095fb6b1de76f0d59a1765f3d8816fb0694/types_setuptools-80.1.0.20250503-py3-none-any.whl", hash = "sha256:b25bcbfeebae06bc4d2d09231b0c0622e95bdbb36df070cfe40b925fcef97dd3", size = 65979, upload-time = "2025-05-03T02:58:14.038Z" },
+    { url = "https://files.pythonhosted.org/packages/3f/bf/466fa9faaf6a99dc68c37492693069c99b4f83c73b5bac59649051a74937/types_setuptools-80.3.0.20250505-py3-none-any.whl", hash = "sha256:117c86a82367306388b55310d04da807ff4c3ecdf769656a5fdc0fdd06a2c1b6", size = 63106, upload-time = "2025-05-05T03:06:43.063Z" },
 ]
 
 [[package]]

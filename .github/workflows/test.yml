@@ -28,7 +28,7 @@ env:
   # renovate: datasource=pypi depName=uv
   UV_VERSION: 0.6.17
   # renovate: datasource=pypi depName=tox
-  TOX_VERSION: 4.25.0
+  TOX_VERSION: 4.26.0
   # renovate: datasource=pypi depName=tox-uv
   TOX_UV_VERSION: 1.25.0
 
@@ -44,6 +44,7 @@ jobs:
         - "3.11"
         - "3.12"
         - "3.13"
+        - "3.14"
         include:
         - { environment: "dependencies", python-version: "3.x" }
         - { environment: "typing",       python-version: "3.x" }

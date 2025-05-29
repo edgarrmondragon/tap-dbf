@@ -128,11 +128,7 @@ addopts = [ "-vvv" ]
 
 [tool.tox]
 min_version = "4.22"
-requires = [
-  "tox",
-  "tox-uv",
-  "tox-gh",
-]
+requires = [ "tox", "tox-uv", "tox-gh" ]
 env_list = [
   "dependencies",
   "typing",
@@ -156,13 +152,9 @@ env_list = [
 # runner = "uv-venv-lock-runner"
 pip_pre = true
 extras = [ "all" ]
-pass_env = [
-  "TAP_DBF_*",
-]
+pass_env = [ "TAP_DBF_*" ]
 dependency_groups = [ "testing" ]
-commands = [
-  [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ],
-]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
 
 [tool.tox.env.dependencies]
 dependency_groups = [ "testing" ]
@@ -171,15 +163,11 @@ commands = [ [ "deptry", "." ] ]
 [tool.tox.env.sync]
 pip_pre = true
 set_env = { TAP_DBF_PATH = "tests/data/files/contacts.dbf", TAP_DBF_IGNORE_MISSING_MEMOFILE = "true" }
-commands = [
-  [ "tap-dbf", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ],
-]
+commands = [ [ "tap-dbf", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ] ]
 
 [tool.tox.env.typing]
 dependency_groups = [ "testing", "typing" ]
-commands = [
-  [ "mypy", "--strict", { replace = "posargs", default = [ "tap_dbf", "tests" ], extend = true } ],
-]
+commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_dbf", "tests" ], extend = true } ] ]
 
 [tool.mypy]
 enable_error_code = [

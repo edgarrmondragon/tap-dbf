@@ -126,6 +126,41 @@ max_supported_python = "3.14"
 [tool.pytest.ini_options]
 addopts = [ "-vvv" ]
 
+[tool.tox]
+min_version = "4.22"
+requires = [ "tox", "tox-uv" ]
+env_list = [
+  "dependencies",
+  "typing",
+  "3.14",
+  "3.13",
+  "3.12",
+  "3.11",
+  "3.10",
+  "3.9",
+]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+pip_pre = true
+extras = [ "all" ]
+pass_env = [ "TAP_DBF_*" ]
+dependency_groups = [ "testing" ]
+commands = [ [ "pytest", { replace = "posargs", default = [ "tests" ], extend = true } ] ]
+
+[tool.tox.env.dependencies]
+dependency_groups = [ "testing" ]
+commands = [ [ "deptry", "." ] ]
+
+[tool.tox.env.sync]
+pip_pre = true
+set_env = { TAP_DBF_PATH = "tests/data/files/contacts.dbf", TAP_DBF_IGNORE_MISSING_MEMOFILE = "true" }
+commands = [ [ "tap-dbf", { replace = "posargs", default = [ "--config=ENV" ], extend = true } ] ]
+
+[tool.tox.env.typing]
+dependency_groups = [ "testing", "typing" ]
+commands = [ [ "mypy", "--strict", { replace = "posargs", default = [ "tap_dbf", "tests" ], extend = true } ] ]
+
 [tool.mypy]
 enable_error_code = [
   "ignore-without-code",

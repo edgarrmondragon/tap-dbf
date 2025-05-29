@@ -7,7 +7,6 @@ on:
     - tap_dbf/**
     - tests/**
     - pyproject.toml
-    - tox.ini
     - uv.lock
     - .github/workflows/test.yml
   pull_request:
@@ -16,7 +15,6 @@ on:
     - tap_dbf/**
     - tests/**
     - pyproject.toml
-    - tox.ini
     - uv.lock
     - .github/workflows/test.yml
   schedule:

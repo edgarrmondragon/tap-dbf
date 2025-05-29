@@ -131,7 +131,6 @@ min_version = "4.22"
 requires = [
   "tox",
   "tox-uv",
-  "tox-gh",
 ]
 env_list = [
   "dependencies",
@@ -144,13 +143,14 @@ env_list = [
   "3.9",
 ]
 
-[tool.tox.gh.python]
-"3.14" = [ "3.14" ]
-"3.13" = [ "3.13", "dependencies", "typing" ]
-"3.12" = [ "3.12" ]
-"3.11" = [ "3.11" ]
-"3.10" = [ "3.10" ]
-"3.9" = [ "3.9" ]
+# https://github.com/tox-dev/tox-gh/issues/175
+# [tool.tox.gh.python]
+# "3.14" = [ "3.14" ]
+# "3.13" = [ "3.13", "dependencies", "typing" ]
+# "3.12" = [ "3.12" ]
+# "3.11" = [ "3.11" ]
+# "3.10" = [ "3.10" ]
+# "3.9" = [ "3.9" ]
 
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"

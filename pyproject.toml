@@ -40,17 +40,17 @@ dynamic = [
 ]
 dependencies = [
   "dbfread~=2.0.7",
-  "fsspec~=2025.3.0",
+  "fsspec~=2025.5.0",
   "singer-sdk~=0.46.0",
 ]
 optional-dependencies.all = [
   "tap-dbf[gcs,s3]",
 ]
 optional-dependencies.gcs = [
-  "gcsfs~=2025.3.0",
+  "gcsfs~=2025.5.0",
 ]
 optional-dependencies.s3 = [
-  "s3fs~=2025.3.0",
+  "s3fs~=2025.5.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-dbf"

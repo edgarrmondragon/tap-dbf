@@ -25,11 +25,9 @@ repos:
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.12.1
   hooks:
-  - id: ruff
-    name: Ruff lint
+  - id: ruff-check
     args: [--fix, --exit-non-zero-on-fix, --show-fixes]
   - id: ruff-format
-    name: Ruff format
 
 - repo: https://github.com/pre-commit/pre-commit
   rev: v4.2.0

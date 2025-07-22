@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "hatchling.build"
 requires = [
-  "hatch-vcs==0.4",
+  "hatch-vcs==0.5",
   "hatchling==1.27",
 ]
 
@@ -23,11 +23,10 @@ maintainers = [
 authors = [
   { name = "Edgar R. Mondragón", email = "edgarrm358@gmail.com" },
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 classifiers = [
   "Operating System :: OS Independent",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -40,17 +39,17 @@ dynamic = [
 ]
 dependencies = [
   "dbfread~=2.0.7",
-  "fsspec~=2025.3.0",
-  "singer-sdk~=0.46.0",
+  "fsspec~=2025.5.0",
+  "singer-sdk~=0.47.0",
 ]
 optional-dependencies.all = [
   "tap-dbf[gcs,s3]",
 ]
 optional-dependencies.gcs = [
-  "gcsfs~=2025.3.0",
+  "gcsfs~=2025.5.0",
 ]
 optional-dependencies.s3 = [
-  "s3fs~=2025.3.0",
+  "s3fs~=2025.5.0",
 ]
 urls.Documentation = "https://github.com/edgarrmondragon/tap-dbf#readme"
 urls.Homepage = "https://github.com/edgarrmondragon/tap-dbf"
@@ -137,7 +136,6 @@ env_list = [
   "3.12",
   "3.11",
   "3.10",
-  "3.9",
 ]
 
 [tool.tox.gh.python]

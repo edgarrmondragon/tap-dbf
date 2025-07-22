@@ -24,13 +24,13 @@ on:
 env:
   FORCE_COLOR: 1
   # renovate: datasource=pypi depName=uv
-  UV_VERSION: 0.7.3
+  UV_VERSION: 0.7.17
   # renovate: datasource=pypi depName=tox
-  TOX_VERSION: 4.26.0
+  TOX_VERSION: 4.27.0
   # renovate: datasource=pypi depName=tox-gh
   TOX_GH_VERSION: 1.5.0
   # renovate: datasource=pypi depName=tox-uv
-  TOX_UV_VERSION: 1.25.0
+  TOX_UV_VERSION: 1.26.1
 
 jobs:
   tests:
@@ -39,7 +39,6 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-        - "3.9"
         - "3.10"
         - "3.11"
         - "3.12"
@@ -55,7 +54,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         allow-prereleases: true
-    - uses: astral-sh/setup-uv@f0ec1fc3b38f5e7cd731bb6ce540c5af426746bb # v6.1.0
+    - uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6.3.1
       with:
         version: ${{ env.UV_VERSION }}
     - name: Run
